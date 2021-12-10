@@ -1,6 +1,6 @@
 # Object-oriented Programming in Python for Mathematicians
 
-## Week 6 Exercises
+## Chapter 6 Exercises
 
 Refer to the [exercise instructions](Referhttps://object-oriented-python.github.io/6_exceptions.html#exercises).
 

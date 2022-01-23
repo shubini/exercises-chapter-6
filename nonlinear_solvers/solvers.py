@@ -87,7 +87,7 @@ def solve(f, df, x_0, x_1, eps=1.0e-5, max_its_n=20, max_its_b=20):
         The maximum number of iterations to be taken before the newton-raphson
         solver is taken to have failed.
     max_its_b : int
-        The maximum number of iterations to be taken before the newton-raphson
+        The maximum number of iterations to be taken before the bisection
         solver is taken to have failed.
 
     Returns

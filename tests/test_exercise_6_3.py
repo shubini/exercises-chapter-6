@@ -6,7 +6,7 @@ import math
 def test_attempt_newton_failure(monkeypatch):
     from nonlinear_solvers.solvers import solve
 
-    def mockreturn(f, g, x0, eps, k):
+    def mockreturn(f, g, x0, eps, max_its):
         from nonlinear_solvers.solvers import ConvergenceError
         raise ConvergenceError
     monkeypatch.setattr('nonlinear_solvers.solvers.newton_raphson', mockreturn)

@@ -64,8 +64,18 @@ def bisection(f, x_0, x_1, eps=1.0e-5, max_its=20):
     float
         The approximate root computed using bisection.
     """
-    # Delete these two lines when implementing the method.
-    raise NotImplementedError
+    if f(x_0) * f(x_1) > 0:
+        raise ValueError("We require f(x_0) and f(x_1) to differ in sign")
+    for i in range(max_its):
+        x_mid = (x_0 + x_1) / 2
+        if abs(f(x_mid)) < eps:
+            return x_mid
+        elif f(x_mid) * f(x_0) > 0:
+            x_0 = x_mid
+        elif f(x_mid) * f(x_0) < 0:
+            x_1 = x_mid
+    raise ConvergenceError(f"Failed to converge from vals {x_0} and {x_1} "
+                           f"after {max_its} iterations")
 
 
 def solve(f, df, x_0, x_1, eps=1.0e-5, max_its_n=20, max_its_b=20):
@@ -99,5 +109,14 @@ def solve(f, df, x_0, x_1, eps=1.0e-5, max_its_n=20, max_its_b=20):
     float
         The approximate root.
     """
-    # Delete these two lines when implementing the method.
-    raise NotImplementedError
+    try:
+        return newton_raphson(f, df, x_0, eps, max_its_n)
+    except ConvergenceError:
+        try:
+            return bisection(f, x_0, x_1, eps, max_its_b)
+        except ConvergenceError:
+            raise ConvergenceError("Neither method converged")
+        except ValueError:
+            raise ValueError("NR method failed to converge and f(x_0)"
+                             "and f(x_1) differ in sign so bisection"
+                             "inappropriate")
